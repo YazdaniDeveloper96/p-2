@@ -1,7 +1,8 @@
 #------------------------------------------------------------------moudules
 from tkinter import *
-from tkinter import font                                                                    # use for bolding font
-from PIL import ImageTk,Image 
+from tkinter import font
+import pygame                                                                  # use for bolding font
+# from PIL import ImageTk,Image 
 #--------------------------------------------------------------------------
 ###########################################################################
 ###########################################################################
@@ -22,13 +23,25 @@ class IranUniversity:
         x=(ws/2)-(w/2)
         y=(hs/2)-(h/2)
         window.geometry("%dx%d+%d+%d"%(w,h,x,y))
-
+    @staticmethod
+    def play_song(value='play'):
+        if value=='play':
+            pygame.mixer.init()
+            pygame.mixer.music.load('music/Music relax Musiceto (10).mp3')
+            pygame.mixer.music.play(loops=2)
+        else:
+            pygame.mixer.music.stop()
+            
     def __init__(self):
         self.main_widget=Tk()                                                                                               
         self.main_widget.title('سیسـتم آشنایـی با دانشــگاه های ایران')                                                                             
         self.main_widget.iconbitmap('icon/iran_kkd_icon.ico')
         IranUniversity.set_size(self.main_widget,600,450)
         self.main_widget.resizable(width=False,height=False)
+        self.music=IranUniversity.play_song()
+        # pygame.mixer.init()
+        # pygame.mixer.music.load('music/Music relax Musiceto (10).mp3')
+        # pygame.mixer.music.play(loops=2)
     ##################################################################### adding imageBackground for main widget
         self.bg = PhotoImage(file = "img/root_background1.png")
         self.enter_city = PhotoImage(file = "img/city_name_botton1.png")

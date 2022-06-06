@@ -1,8 +1,10 @@
+
 #------------------------------------------------------------------moudules
+import secrets
 from tkinter import *
-from tkinter import font
-import pygame                                                                  # use for bolding font
-# from PIL import ImageTk,Image 
+from tkinter import font                          # use for bolding font
+from external_modules.play_song import *
+from tkinter import ttk
 #--------------------------------------------------------------------------
 ###########################################################################
 ###########################################################################
@@ -23,25 +25,35 @@ class IranUniversity:
         x=(ws/2)-(w/2)
         y=(hs/2)-(h/2)
         window.geometry("%dx%d+%d+%d"%(w,h,x,y))
-    @staticmethod
-    def play_song(value='play'):
-        if value=='play':
-            pygame.mixer.init()
-            pygame.mixer.music.load('music/Music relax Musiceto (10).mp3')
-            pygame.mixer.music.play(loops=2)
-        else:
-            pygame.mixer.music.stop()
-            
+    def show_result(self):
+        second_page=Toplevel()
+        second_page.title('نتایج جستو جو')
+        second_page.iconbitmap('icon/iran_kkd_icon.ico')
+        IranUniversity.set_size(second_page,900,300)
+        second_page.resizable(width=False,height=False)
+        tree=ttk.Treeview(second_page,column=("province state ",'web page'),show='headings',height=5)
+        tree.grid(row=1,columnspan=1,padx=10,pady=20)
+        tree.column('# 1',anchor=CENTER,width=300)
+        tree.heading('# 1',text='نام دانشگاه')
+        tree.column('# 2',anchor=CENTER,width=575)
+        tree.heading('# 2',text='آدرس اینترنتی دانشگاه')
+
+        #------get all products---------
+        n=1
+        try:
+            for item in self.book:
+                tree.insert('','end',text=str(n),values=(item[0],item[1]))
+                n+=1
+        except Exception as error:
+            # messagebox.showwarning(book_window,message="متاسفانه دسترسی به دیتابیس امکان پذیر نیست")
+            pass
     def __init__(self):
         self.main_widget=Tk()                                                                                               
         self.main_widget.title('سیسـتم آشنایـی با دانشــگاه های ایران')                                                                             
         self.main_widget.iconbitmap('icon/iran_kkd_icon.ico')
         IranUniversity.set_size(self.main_widget,600,450)
         self.main_widget.resizable(width=False,height=False)
-        self.music=IranUniversity.play_song()
-        # pygame.mixer.init()
-        # pygame.mixer.music.load('music/Music relax Musiceto (10).mp3')
-        # pygame.mixer.music.play(loops=2)
+        self.music=playSong()
     ##################################################################### adding imageBackground for main widget
         self.bg = PhotoImage(file = "img/root_background1.png")
         self.enter_city = PhotoImage(file = "img/city_name_botton1.png")
@@ -57,7 +69,7 @@ class IranUniversity:
         self.entry_box_city=Entry(master=self.canvas1,borderwidth=2,width=13,font=('tahoma',22,font.BOLD)) 
         self.entry_box_city.grid(row=0,column=1,padx=(5,0),pady=(380,0))
     ################################################################################################ add button
-        self.button_show=Button(master=self.canvas1,image=self.but_show,borderwidth=1,bg='#ffffff') 
+        self.button_show=Button(master=self.canvas1,image=self.but_show,borderwidth=1,bg='#ffffff',command=self.show_result) 
         self.button_show.grid(row=0,column=2,padx=(5,0),pady=(380,0))
 
 

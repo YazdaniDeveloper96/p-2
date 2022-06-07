@@ -1,5 +1,7 @@
 import imp
 import sys
+
+from requests import head
 sys.path.insert(0,"C:/Users/MohammadReza/Desktop/p-2")
 #------------------------------------------------------------------moudules
 from tkinter import *
@@ -52,11 +54,11 @@ class IranUniversity:
         self.but_mute = PhotoImage(file = "img/mute_botton.png")
         self.but_ret = PhotoImage(file = "img/return_botton.png")
     ##################################################################### adding imageBackground for main widget
-        self.canvas1 = Canvas(self.tab_1,width = 400,height = 400,borderwidth=0)
+        self.canvas1 = Canvas(self.tab_1,width = 400,height = 400,highlightthickness=0)
         self.canvas1.pack(fill = "both", expand = True)
         self.canvas1.create_image(0,0,image = self.bg1,anchor="nw")
     ##################################################################### adding imageBackground for main widget
-        self.canvas2 = Canvas(self.tab_2,width = 400,height = 400,borderwidth=0)
+        self.canvas2 = Canvas(self.tab_2,width = 400,height = 400,highlightthickness=0)
         self.canvas2.pack(fill = "both", expand = True)
         self.canvas2.create_image(0,0,image = self.bg2,anchor="nw")
     ################################################################################################ add label in home

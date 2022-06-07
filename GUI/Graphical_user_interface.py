@@ -5,6 +5,7 @@ from tkinter import *
 from tkinter import font                          # use for bolding font
 from external_modules.play_song import *
 from tkinter import ttk
+from DAL.read_data_from_api import *
 #--------------------------------------------------------------------------
 ###########################################################################
 ###########################################################################

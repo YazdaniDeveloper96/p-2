@@ -13,17 +13,15 @@ def read_api_data(cityname):
     req=requests.get('http://universities.hipolabs.com/search?country=IRAN')
     if req.status_code==200:
         for item in req.json():
-            if item['state-province']==cityname.capitalize():
+            if (str(item['state-province'])).capitalize()==cityname.capitalize():
                 result_list.append({'state-province':item['state-province'],"name":item["name"],"web_pages":item["web_pages"][0]})
-            else:
-                raise City_Error_Handling('your city is not found')
         return result_list
     else:
-        raise Url_Error_Handling ('our server is out of order')
+        raise Url_Error_Handling ('ارتباط با دیتا بیس در حال حاظر امکان پذیر نیست')
 
 if __name__=='__main__':
     try:
-        for item in read_api_data('mashhad'):
+        for item in read_api_data('sistan and Baluchestan'):
             print(item)
     except Url_Error_Handling as error:
             print(error)

@@ -1,6 +1,6 @@
-
+import sys
+sys.path.insert(0,"C:/Users/MohammadReza/Desktop/p-2")
 #------------------------------------------------------------------moudules
-import secrets
 from tkinter import *
 from tkinter import font                          # use for bolding font
 from external_modules.play_song import *
@@ -25,28 +25,7 @@ class IranUniversity:
         x=(ws/2)-(w/2)
         y=(hs/2)-(h/2)
         window.geometry("%dx%d+%d+%d"%(w,h,x,y))
-    def show_result(self):
-        second_page=Toplevel()
-        second_page.title('نتایج جستو جو')
-        second_page.iconbitmap('icon/iran_kkd_icon.ico')
-        IranUniversity.set_size(second_page,900,300)
-        second_page.resizable(width=False,height=False)
-        tree=ttk.Treeview(second_page,column=("province state ",'web page'),show='headings',height=5)
-        tree.grid(row=1,columnspan=1,padx=10,pady=20)
-        tree.column('# 1',anchor=CENTER,width=300)
-        tree.heading('# 1',text='نام دانشگاه')
-        tree.column('# 2',anchor=CENTER,width=575)
-        tree.heading('# 2',text='آدرس اینترنتی دانشگاه')
 
-        #------get all products---------
-        n=1
-        try:
-            for item in self.book:
-                tree.insert('','end',text=str(n),values=(item[0],item[1]))
-                n+=1
-        except Exception as error:
-            # messagebox.showwarning(book_window,message="متاسفانه دسترسی به دیتابیس امکان پذیر نیست")
-            pass
     def __init__(self):
         self.main_widget=Tk()                                                                                               
         self.main_widget.title('سیسـتم آشنایـی با دانشــگاه های ایران')                                                                             
@@ -69,33 +48,33 @@ class IranUniversity:
         self.entry_box_city=Entry(master=self.canvas1,borderwidth=2,width=13,font=('tahoma',22,font.BOLD)) 
         self.entry_box_city.grid(row=0,column=1,padx=(5,0),pady=(380,0))
     ################################################################################################ add button
-        self.button_show=Button(master=self.canvas1,image=self.but_show,borderwidth=1,bg='#ffffff',command=self.show_result) 
+        self.button_show=Button(master=self.canvas1,image=self.but_show,borderwidth=1,bg='#ffffff') 
         self.button_show.grid(row=0,column=2,padx=(5,0),pady=(380,0))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    ################################################################################################ bind 
+        self.button_show.bind('<Button-1>',lambda event:self.__show_result(event))
 
 
         self.main_widget.mainloop()
+
+    def __show_result(self,event):
+        second_page=Toplevel()
+        second_page.title('نتایج جستو جو')
+        second_page.iconbitmap('icon/iran_kkd_icon.ico')
+        IranUniversity.set_size(second_page,900,300)
+        second_page.resizable(width=False,height=False)
+        tree=ttk.Treeview(second_page,column=("province state ",'web page'),show='headings',height=5)
+        tree.grid(row=1,columnspan=1,padx=10,pady=20)
+        tree.column('# 1',anchor=CENTER,width=300)
+        tree.heading('# 1',text='نام دانشگاه')
+        tree.column('# 2',anchor=CENTER,width=575)
+        tree.heading('# 2',text='آدرس اینترنتی دانشگاه')
+
+        #------get all products---------
+        n=1
+        try:
+            for item in self.book:
+                tree.insert('','end',text=str(n),values=(item[0],item[1]))
+                n+=1
+        except Exception as error:
+            # messagebox.showwarning(book_window,message="متاسفانه دسترسی به دیتابیس امکان پذیر نیست")
+            pass

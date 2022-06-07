@@ -1,4 +1,3 @@
-import imp
 import sys
 
 from requests import head
@@ -81,9 +80,7 @@ class IranUniversity:
         self.button_sound.bind('<Button-1>',lambda event:self.__change_song_status(event,'play'))
         self.button_mute.bind('<Button-1>',lambda event:self.__change_song_status(event,'off'))
 
-        
-
-
+    
         self.main_widget.mainloop()
 
     def __show_result(self,event):
@@ -103,7 +100,7 @@ class IranUniversity:
         tree.column('# 3',anchor=CENTER,width=200)
         tree.heading('# 3',text='آدرس اینترنتی دانشگاه')
 
-        #------get all products---------
+        #------get all universities---------
         city_name=self.entry_box_city.get()
 
         try:

@@ -1,6 +1,4 @@
 import sys
-
-from requests import head
 sys.path.insert(0,"C:/Users/MohammadReza/Desktop/p-2")
 #------------------------------------------------------------------moudules
 from tkinter import *

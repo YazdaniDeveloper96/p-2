@@ -105,10 +105,10 @@ class IranUniversity:
 
         try:
             if city_name=='':
-                raise RuntimeError('لطفا شهر مورد نظر را وارد کنید')
+                raise RuntimeError('لطفا شهر مورد نظر را به زبان انگیلیسی وارد کنید')
             result=read_api_data(city_name)
             if len(result)==0:
-                raise City_Error_Handling('نام شهر مورد نظر را به درستی وارد کنید')
+                raise City_Error_Handling('نام شهر مورد نظر را به درستی به زبان انگیلیسی وارد کنید')
             n=1
             for item in result:
                 tree.insert('','end',text=str(n),values=(item['state-province'],item['name'],item['web_pages']))
